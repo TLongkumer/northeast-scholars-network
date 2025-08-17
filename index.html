@@ -1,444 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Northeast Scholars Network (NSN)</title>
-  <meta name="description" content="Northeast Scholars Network – connecting scholars from Northeast India and beyond through mentorship, research circles, and collaborative opportunities." />
-  <meta property="og:title" content="Northeast Scholars Network (NSN)" />
-  <meta property="og:description" content="Connecting scholars from Northeast India and beyond through mentorship, research circles, and collaborative opportunities." />
-  <meta name="theme-color" content="#0f5c56">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ===============================
-       NSN Brand Palette (from logo)
-       ---------------------------------
-       --nsn-teal: primary deep teal
-       --nsn-teal-700: darker teal for text
-       --nsn-mint: light teal accent
-       --nsn-gold: mustard/orange nodes
-       --nsn-ink: near-black text
-       =============================== */
-    :root {
-      --nsn-teal: #0f5c56;
-      --nsn-teal-700: #0a4642;
-      --nsn-mint: #e9f5f3;
-      --nsn-gold: #f5a623;
-      --nsn-ink: #0b1f20;
-      --nsn-slate: #2a3b3c;
-      --nsn-bg: #f7fbfb;
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(15,92,86,0.12);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northeast Scholars Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--nsn-slate);
-      background: var(--nsn-bg);
-      line-height: 1.6;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #ffffff;
+        }
 
-    /* ---------- Top Nav ---------- */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(180%) blur(8px);
-      background: rgba(255,255,255,0.75);
-      border-bottom: 1px solid rgba(15,92,86,0.08);
-    }
-    .nav-inner { max-width: 1160px; margin: 0 auto; padding: 14px 20px; display:flex; align-items:center; justify-content:space-between; }
-    .brand { display:flex; align-items:center; gap: 12px; text-decoration:none; color: var(--nsn-teal-700); }
-    .brand img { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; }
-    .brand span { font-weight: 800; letter-spacing: .4px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .nav-links { display:flex; gap: 20px; align-items:center; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--nsn-teal-700);
-      font-weight: 600;
-      padding: 10px 12px;
-      border-radius: 10px;
-    }
-    .nav-links a:hover { background: var(--nsn-mint); }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d5a5a 0%, #1a3d3d 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    .menu-btn { display: none; border: 0; background: transparent; font-size: 28px; color: var(--nsn-teal); }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* ---------- Hero ---------- */
-    .hero {
-      position: relative;
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(245,166,35,.15), transparent 60%),
-                  radial-gradient(900px 500px at -10% 10%, rgba(15,92,86,.10), transparent 60%),
-                  linear-gradient(180deg, #ffffff, #f3faf8 55%);
-      overflow: hidden;
-    }
-    .hero .container {
-      max-width: 1160px; margin: 0 auto; padding: 80px 20px 60px; display:grid; grid-template-columns: 1.2fr .8fr; gap: 40px;
-    }
-    .eyebrow { color: var(--nsn-teal); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: 12px; }
-    .hero h1 { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; color: var(--nsn-ink); margin: 10px 0 14px; }
-    .hero p { font-size: 18px; color: #325857; max-width: 60ch; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .cta-row { display:flex; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
-    .btn { border: 0; padding: 14px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display:inline-flex; align-items:center; gap:10px; }
-    .btn-primary { background: var(--nsn-teal); color: #fff; box-shadow: var(--shadow); }
-    .btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
-    .btn-ghost { color: var(--nsn-teal); background: #ffffff; border: 1px solid rgba(15,92,86,.15); }
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
 
-    .hero-card {
-      background: #fff; border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
-      display: grid; place-items: center; text-align:center;
-    }
-    .hero-card img { max-width: 200px; width: 80%; height: auto; }
-    .hero-card small { display:block; color:#5b7a79; margin-top: 10px; }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
 
-    /* ---------- Sections ---------- */
-    section { padding: 84px 20px; }
-    .container { max-width: 1160px; margin: 0 auto; }
-    .section-head { display:flex; align-items:end; gap: 16px; justify-content: space-between; margin-bottom: 26px; }
-    .section-title { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(28px, 3.2vw, 44px); margin: 0; color: var(--nsn-ink); }
-    .section-sub { color:#456; max-width: 70ch; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
 
-    /* Cards grid */
-    .grid { display:grid; gap: 18px; }
-    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    @media (max-width: 900px) { .hero .container{grid-template-columns: 1fr;} .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 640px) { .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } .nav-links{ display:none;} .menu-btn{display:block;} }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    .card { background: #fff; border: 1px solid rgba(15,92,86,.08); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
-    .card h3 { margin: 0 0 8px; color: var(--nsn-teal-700); }
-    .card p { margin: 0; color: #345; }
+        .nav-links a:hover {
+            color: #e67e22;
+        }
 
-    .pill { display:inline-block; font-size: 12px; font-weight: 700; letter-spacing:.08em; text-transform: uppercase; padding: 8px 12px; border-radius: 999px; background: var(--nsn-mint); color: var(--nsn-teal-700); }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(45, 90, 90, 0.95), rgba(26, 61, 61, 0.95)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
 
-    /* Feature list */
-    .features { list-style: none; margin: 14px 0 0; padding: 0; }
-    .features li { display:flex; gap: 10px; align-items:flex-start; margin: 10px 0; }
-    .tick { width: 20px; height: 20px; border-radius: 999px; background: var(--nsn-gold); display:grid; place-items:center; color: #063; font-weight: 900; line-height: 1; font-size: 14px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
 
-    /* Highlight band */
-    .band { background: linear-gradient(180deg, #fff, #eef8f6); border-top: 1px solid rgba(15,92,86,.08); border-bottom: 1px solid rgba(15,92,86,.08); }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
 
-    /* CTA banner */
-    .cta-banner { background: var(--nsn-teal); color: #fff; border-radius: var(--radius); padding: 30px; display:flex; align-items:center; justify-content:space-between; gap: 16px; box-shadow: var(--shadow); }
-    .cta-banner h3 { margin: 0; font-size: clamp(20px, 2.6vw, 28px); }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    /* Footer */
-    footer { background: #0d4945; color: #e9f5f3; }
-    .footer-inner { max-width: 1160px; margin: 0 auto; padding: 40px 20px; display:grid; gap: 18px; grid-template-columns: 1.2fr 1fr 1fr; }
-    .footer-inner a { color: #e9f5f3; text-decoration: none; opacity:.9; }
-    .copy { border-top: 1px solid rgba(255,255,255,.15); padding: 16px 20px; text-align:center; font-size: 14px; opacity:.9; }
-    @media (max-width: 820px){ .footer-inner{ grid-template-columns: 1fr; } }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-    /* Decorative orbs like the logo nodes */
-    .orb { position:absolute; width: 10px; height: 10px; background: var(--nsn-gold); border-radius: 999px; opacity:.9; box-shadow: 0 4px 14px rgba(245,166,35,.4); animation: float 6s ease-in-out infinite; }
-    .orb.o1{ top: 14%; left: 8%; }
-    .orb.o2{ top: 8%; left: 22%; width: 14px; height:14px; animation-delay: .6s; }
-    .orb.o3{ top: 18%; right: 18%; }
-    .orb.o4{ bottom: 14%; right: 6%; width: 14px; height:14px; animation-delay: .2s; }
-    .orb.o5{ bottom: 10%; left: 16%; animation-delay: 1s; }
-    @keyframes float{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-8px);} }
-  </style>
+        .btn-primary {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #d35400, #b7471d);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2d5a5a;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2d5a5a;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Objectives Section */
+        .objectives {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .objective-card {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border-left: 5px solid #e67e22;
+            transition: all 0.3s ease;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .objective-card h3 {
+            color: #2d5a5a;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .objective-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2d5a5a, #1a3d3d);
+            color: white;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .event-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .event-card h3 {
+            color: #e67e22;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .event-card p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .facebook { background: #3b5998; }
+        .twitter { background: #1da1f2; }
+        .linkedin { background: #0077b5; }
+        .email { background: #e67e22; }
+
+        /* Footer */
+        footer {
+            background: #1a3d3d;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a class="brand" href="#top">
-        <!-- Replace src with your logo file path e.g., assets/logo.png -->
-        <img src="assets/logo.png" alt="NSN logo" />
-        <span>NE&nbsp;Scholars&nbsp;Network</span>
-      </a>
-      <button class="menu-btn" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#programs">Programs</a>
-        <a href="#membership">Membership</a>
-        <a href="#events">Events</a>
-        <a href="#contact" class="btn btn-ghost">Contact</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header id="top" class="hero">
-    <div class="orb o1"></div>
-    <div class="orb o2"></div>
-    <div class="orb o3"></div>
-    <div class="orb o4"></div>
-    <div class="orb o5"></div>
-
-    <div class="container">
-      <div>
-        <div class="eyebrow">Northeast Scholars Network</div>
-        <h1>Research. Mentorship. <span style="color:var(--nsn-teal)">Community</span>.</h1>
-        <p>NSN connects undergraduate and graduate students, early‑career researchers, and faculty interested in the Northeast through mentorship circles, collaborative research, and public‑facing scholarship. Join us to co‑shape a thriving scholarly ecosystem.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#membership">Join the Network</a>
-          <a class="btn btn-ghost" href="#programs">Explore Programs</a>
-        </div>
-      </div>
-      <div>
-        <div class="hero-card">
-          <!-- Replace with your logo path -->
-          <img src="assets/logo.png" alt="Northeast Scholars Network logo" />
-          <small>Rooted in the Northeast • Connected to the world</small>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- About -->
-  <section id="about">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">About NSN</h2>
-        <span class="pill">Non‑profit | Scholar‑led</span>
-      </div>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Our Mission</h3>
-          <p>To cultivate a vibrant network of scholars from and working in the Northeast by enabling mentorship, collaborative learning, and public engagement. We champion rigorous research, ethical practice, and inclusive knowledge production.</p>
-          <ul class="features">
-            <li><span class="tick">✓</span> Cross‑disciplinary mentorship & peer support</li>
-            <li><span class="tick">✓</span> Research circles and writing groups</li>
-            <li><span class="tick">✓</span> Workshops on methods, ethics, and publishing</li>
-            <li><span class="tick">✓</span> Grants, calls, and opportunity curation</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Who We Serve</h3>
-          <p>Undergraduate & master’s students, early PhD scholars, independent researchers, and faculty allies. Whether you’re just starting out or seeking collaborators for advanced projects, you’ll find a community here.</p>
-          <ul class="features">
-            <li><span class="tick">✓</span> Student researchers building foundational skills</li>
-            <li><span class="tick">✓</span> Early‑career academics seeking mentorship</li>
-            <li><span class="tick">✓</span> Senior scholars mentoring and co‑authoring</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Programs -->
-  <section id="programs" class="band">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Programs & Activities</h2>
-        <p class="section-sub">Signature offerings that combine rigor with care. Each program is designed to foster skills, confidence, and cross‑institutional connections.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="card">
-          <h3>Mentorship Circles</h3>
-          <p>Small cohorts guided by faculty and advanced researchers. Quarterly themes: research design, methods, analysis, and publishing.</p>
-        </div>
-        <div class="card">
-          <h3>Research & Writing Labs</h3>
-          <p>Hands‑on sessions for proposal drafting, IRB/ethics, data analysis, and journal submission pipelines.</p>
-        </div>
-        <div class="card">
-          <h3>Talks & Public Conversations</h3>
-          <p>Author meet‑ups, thematic dialogues, and public scholarship via podcasts and webinars.</p>
-        </div>
-        <div class="card">
-          <h3>Opportunities Desk</h3>
-          <p>Curated fellowships, calls for papers, grants, and summer schools relevant to the Northeast and allied fields.</p>
-        </div>
-        <div class="card">
-          <h3>Community Fieldnotes</h3>
-          <p>A collaborative blog/newsletter featuring field reflections, book notes, and methodological insights.</p>
-        </div>
-        <div class="card">
-          <h3>Skill Workshops</h3>
-          <p>Communication, public speaking, and AI‑augmented research workflows anchored in academic integrity.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Membership -->
-  <section id="membership">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Membership</h2>
-        <p class="section-sub">Choose a path that matches your stage and goals. All tiers include access to open events and our newsletter.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="card">
-          <span class="pill">Grassroots</span>
-          <h3>Emerging Scholars</h3>
-          <p>Master’s students & early PhDs. Build research foundations with guided peer support.</p>
-          <ul class="features">
-            <li><span class="tick">✓</span> Mentorship circle placement</li>
-            <li><span class="tick">✓</span> Research & writing labs</li>
-            <li><span class="tick">✓</span> Opportunity curation</li>
-          </ul>
-          <div class="cta-row"><a class="btn btn-primary" href="#contact">Apply</a></div>
-        </div>
-        <div class="card" style="border-top: 5px solid var(--nsn-gold)">
-          <span class="pill">Core</span>
-          <h3>Core Members</h3>
-          <p>Active researchers and faculty who co‑lead circles and co‑author public scholarship.</p>
-          <ul class="features">
-            <li><span class="tick">✓</span> Lead mentorship cohorts</li>
-            <li><span class="tick">✓</span> Convene thematic labs</li>
-            <li><span class="tick">✓</span> Priority collaboration slots</li>
-          </ul>
-          <div class="cta-row"><a class="btn btn-primary" href="#contact">Express Interest</a></div>
-        </div>
-        <div class="card">
-          <span class="pill">Allies</span>
-          <h3>Partners & Institutions</h3>
-          <p>Collaborate on events, training, internships, and regional research initiatives.</p>
-          <ul class="features">
-            <li><span class="tick">✓</span> Joint workshops & talks</li>
-            <li><span class="tick">✓</span> Internship & field support</li>
-            <li><span class="tick">✓</span> Shared publications</li>
-          </ul>
-          <div class="cta-row"><a class="btn btn-ghost" href="#contact">Partner with NSN</a></div>
-        </div>
-      </div>
-
-      <div style="margin-top:26px" class="cta-banner">
-        <h3>Ready to co‑create a stronger research culture in the Northeast?</h3>
-        <a class="btn btn-gold btn-primary" style="background:var(--nsn-gold); color:#35250a" href="#contact">Join the Network</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Events / Highlights -->
-  <section id="events" class="band">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Upcoming & Highlights</h2>
-        <p class="section-sub">A snapshot of what’s next. Replace these with live updates or a Google Calendar embed.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="card">
-          <h3>Method Lab: Writing Ethnography</h3>
-          <p><strong>Date:</strong> 28 Sept • <strong>Format:</strong> Hybrid</p>
-          <p>Practical clinic on fieldnotes, analysis, and public‑facing writing.</p>
-        </div>
-        <div class="card">
-          <h3>NSN Research Circle – Cohort 3</h3>
-          <p><strong>Opens:</strong> Oct • <strong>Focus:</strong> Proposal to Publication</p>
-          <p>From research design to peer‑reviewed submission, step by step.</p>
-        </div>
-        <div class="card">
-          <h3>Calls & Grants Digest</h3>
-          <p><strong>Monthly:</strong> Curated opportunities</p>
-          <p>Fellowships, CFPs, and workshops relevant to Northeast scholarship.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="section-sub">Questions, collaborations, or membership? Send us a message — we’d love to hear from you.</p>
-      </div>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Write to Us</h3>
-          <p>Email: <a href="mailto:hello@northeastscholars.org">hello@northeastscholars.org</a> (replace with your official address)</p>
-          <form onsubmit="openMail(event)" class="contact-form">
-            <div style="display:grid; gap:12px; grid-template-columns: 1fr 1fr;">
-              <input required name="name" placeholder="Full name" style="padding:12px;border:1px solid #cfe5e3;border-radius:10px;">
-              <input required name="email" type="email" placeholder="Email" style="padding:12px;border:1px solid #cfe5e3;border-radius:10px;">
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%232d5a5a'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EN%3C/text%3E%3C/svg%3E" alt="NSN Logo">
+                <h1>NSN</h1>
             </div>
-            <input name="subject" placeholder="Subject" style="margin-top:12px;padding:12px;border:1px solid #cfe5e3;border-radius:10px;width:100%">
-            <textarea required name="message" placeholder="Your message" rows="5" style="margin-top:12px;padding:12px;border:1px solid #cfe5e3;border-radius:10px;width:100%"></textarea>
-            <button class="btn btn-primary" type="submit">Send</button>
-          </form>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="fade-in-up">Northeast Scholars Network</h1>
+            <p class="fade-in-up">A community-driven collective for scholars in the social sciences and humanities, creating an inclusive space for collaboration, support, and intellectual growth.</p>
+            <div class="cta-buttons fade-in-up">
+                <a href="#" class="btn btn-primary" onclick="handleJoinUs()">Join Us</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
         </div>
-        <div class="card">
-          <h3>Newsletter</h3>
-          <p>Get monthly updates on events, research circles, and opportunities.</p>
-          <form onsubmit="event.preventDefault(); alert('Subscribed! Replace this with your provider (e.g., Mailchimp, Beehiiv).');">
-            <input required type="email" placeholder="Your email" style="padding:12px;border:1px solid #cfe5e3;border-radius:10px;width:100%">
-            <button class="btn btn-ghost" type="submit" style="margin-top:10px">Subscribe</button>
-          </form>
-          <hr style="margin:20px 0; border:0; border-top:1px solid rgba(15,92,86,.15)">
-          <h3>Social</h3>
-          <p>Add your links: <a href="#">Twitter/X</a> · <a href="#">Instagram</a> · <a href="#">LinkedIn</a></p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About NSN</h2>
+            <p class="section-subtitle">Building bridges in academia through peer support and collaborative learning</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>The Northeast Scholars Network (NSN) is a community-driven collective for scholars in the social sciences and humanities, hailing from Northeast India and across the country. It was born from the understanding that the academic journey, while rewarding, can also be isolating.</p>
+                    <p>This is not a top-down mentorship program but a circle of peers. The group comprises individuals who have faced, and are still facing, academic challenges and are committed to supporting others on the same path.</p>
+                    <p>Our mission is to create an inclusive space where we can all come together to share our work, exchange ideas, and find support at every stage of our academic journey.</p>
+                </div>
+                <div class="about-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f8f9fa' width='400' height='300'/%3E%3Ccircle cx='120' cy='120' r='20' fill='%23e67e22'/%3E%3Ccircle cx='200' cy='80' r='20' fill='%232d5a5a'/%3E%3Ccircle cx='280' cy='140' r='20' fill='%23e67e22'/%3E%3Ccircle cx='160' cy='200' r='20' fill='%232d5a5a'/%3E%3Ccircle cx='240' cy='220' r='20' fill='%23e67e22'/%3E%3Cline x1='120' y1='120' x2='200' y2='80' stroke='%232d5a5a' stroke-width='3'/%3E%3Cline x1='200' y1='80' x2='280' y2='140' stroke='%232d5a5a' stroke-width='3'/%3E%3Cline x1='280' y1='140' x2='240' y2='220' stroke='%232d5a5a' stroke-width='3'/%3E%3Cline x1='240' y1='220' x2='160' y2='200' stroke='%232d5a5a' stroke-width='3'/%3E%3Cline x1='160' y1='200' x2='120' y2='120' stroke='%232d5a5a' stroke-width='3'/%3E%3C/svg%3E" alt="Academic Network Illustration">
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px">
-          <img src="assets/logo.png" alt="NSN logo" width="40" height="40" />
-          <strong>Northeast Scholars Network</strong>
+    <!-- Objectives Section -->
+    <section id="objectives" class="objectives">
+        <div class="container">
+            <h2 class="section-title">Our Objectives</h2>
+            <p class="section-subtitle">Guided by a spirit of shared learning and reciprocity</p>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <h3>Foster Connection & Collaboration</h3>
+                    <p>Create opportunities to connect with peers and mentors across disciplines, encouraging an environment where collaborative research projects can organically emerge.</p>
+                </div>
+                <div class="objective-card">
+                    <h3>Promote Open Dialogue</h3>
+                    <p>Encourage discussions on research topics, methodologies, and findings to inspire fresh perspectives and provide a platform for sharing work and exploring new ideas.</p>
+                </div>
+                <div class="objective-card">
+                    <h3>Offer Peer-to-Peer Support</h3>
+                    <p>Share guidance and resources for the research lifecycle, from developing research proposals to navigating publications, particularly for early-career researchers.</p>
+                </div>
+                <div class="objective-card">
+                    <h3>Amplify Research & Voices</h3>
+                    <p>Provide a platform to present research focused on Northeast India and create opportunities to engage in public scholarship and policy-relevant discussions.</p>
+                </div>
+            </div>
         </div>
-        <p style="margin:0">Building a generous, rigorous, and collaborative research culture across the Northeast — and beyond.</p>
-      </div>
-      <div>
-        <strong>Explore</strong>
-        <ul style="list-style:none; padding:0; margin:10px 0 0; display:grid; gap:6px">
-          <li><a href="#about">About</a></li>
-          <li><a href="#programs">Programs</a></li>
-          <li><a href="#membership">Membership</a></li>
-          <li><a href="#events">Events</a></li>
-        </ul>
-      </div>
-      <div>
-        <strong>Contact</strong>
-        <ul style="list-style:none; padding:0; margin:10px 0 0; display:grid; gap:6px">
-          <li><a href="mailto:hello@northeastscholars.org">hello@northeastscholars.org</a></li>
-          <li>Thimphu, Bhutan (example)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="copy">© <span id="year"></span> Northeast Scholars Network. All rights reserved.</div>
-  </footer>
+    </section>
 
-  <script>
-    // Mobile nav toggle
-    function toggleMenu(){
-      const nav = document.getElementById('navLinks');
-      const showing = window.getComputedStyle(nav).display !== 'none';
-      nav.style.display = showing ? 'none' : 'flex';
-      nav.style.flexDirection = showing ? '' : 'column';
-      nav.style.background = showing ? '' : 'rgba(255,255,255,.96)';
-      nav.style.position = showing ? '' : 'absolute';
-      nav.style.right = showing ? '' : '20px';
-      nav.style.top = showing ? '' : '62px';
-      nav.style.padding = showing ? '' : '14px';
-      nav.style.border = showing ? '' : '1px solid rgba(15,92,86,.12)';
-      nav.style.borderRadius = showing ? '' : '12px';
-      nav.style.boxShadow = showing ? '' : '0 10px 30px rgba(15,92,86,.12)';
-    }
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Our Events & Discussions</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Interactive sessions designed to foster collaborative learning</p>
+            <div class="events-grid">
+                <div class="event-card">
+                    <h3>Proposal & Writing Workshops</h3>
+                    <p>Peer-led sessions where we collectively deconstruct research proposals, thesis chapters, or manuscripts to understand what makes them effective.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Works-in-Progress Sessions</h3>
+                    <p>A safe and constructive space to present ongoing research and receive thoughtful feedback from a multidisciplinary group.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Thematic Roundtables</h3>
+                    <p>Informal, moderated discussions on specific research themes, methodologies, or challenges designed to spark curiosity and dialogue.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Skill-Sharing Sessions</h3>
+                    <p>Members share practical skills they have learned, such as using Generative AI, navigating academic databases, or preparing presentations.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Experience Sharing Circles</h3>
+                    <p>Candid conversations where scholars at different stages share their personal journeys, discussing topics like the job market and work-life balance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Simple mailto helper
-    function openMail(e){
-      e.preventDefault();
-      const f = e.target; const name = encodeURIComponent(f.name.value);
-      const email = encodeURIComponent(f.email.value);
-      const subject = encodeURIComponent(f.subject.value || 'NSN Inquiry');
-      const message = encodeURIComponent(f.message.value + `\n\n— ${f.name.value} (${f.email.value})`);
-      window.location.href = `mailto:hello@northeastscholars.org?subject=${subject}&body=${message}`;
-    }
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Connect with us and join our growing community of scholars</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="handleJoinUs()">Join Our Network</a>
+                <a href="#" class="btn btn-secondary" onclick="handleGetInTouch()">Contact Us</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-btn facebook" onclick="handleSocialLink('facebook')" title="Facebook">📘</a>
+                <a href="#" class="social-btn twitter" onclick="handleSocialLink('twitter')" title="Twitter">🐦</a>
+                <a href="#" class="social-btn linkedin" onclick="handleSocialLink('linkedin')" title="LinkedIn">💼</a>
+                <a href="#" class="social-btn email" onclick="handleSocialLink('email')" title="Email">✉️</a>
+            </div>
+        </div>
+    </section>
 
-    // Year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Northeast Scholars Network. All rights reserved.</p>
+            <p>Building a vibrant and humane scholarly community.</p>
+        </div>
+    </footer>
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        if(id.length > 1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'}); }
-      });
-    });
-  </script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Button click handlers
+        function handleJoinUs() {
+            alert('Join Us functionality - You can link this to your registration form or email signup!');
+        }
+
+        function handleGetInTouch() {
+            alert('Get In Touch functionality - You can link this to your contact form or email!');
+        }
+
+        function handleSocialLink(platform) {
+            alert(`${platform.charAt(0).toUpperCase() + platform.slice(1)} link - Add your social media URL here!`);
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for scroll animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(45, 90, 90, 0.95), rgba(26, 61, 61, 0.95))';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2d5a5a 0%, #1a3d3d 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
